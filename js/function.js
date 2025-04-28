@@ -22,6 +22,7 @@ function checkPallid (string) {
 }
 
 checkPallid('топот');
+checkPallid('Довод');
 
 
 function getNumber(string) {
