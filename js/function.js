@@ -59,4 +59,4 @@ function getTime(startTime, endTime, meetingStart, meetingDuration) {
   );
 }
 
-getTime();
+getTime(0, 0, 0, 0);
