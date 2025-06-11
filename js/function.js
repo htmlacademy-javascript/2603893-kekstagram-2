@@ -40,4 +40,3 @@ function getNumber(string) {
 
 
 getNumber('2023');
-
