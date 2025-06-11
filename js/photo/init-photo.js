@@ -1,13 +1,13 @@
-import { DESCRIPTION } from './constants';
-import { getRandomInteger, getRandomArrayElement } from './utils';
-import { createComments } from './comments';
+import { DESCRIPTION } from '../constants';
+import { getRandomArrayElement, getRandomInteger } from '../utils';
+import { initComments } from '../comments/init-comments';
 
 const photoDescriptions = () => {
   const photos = Array.from({ length: 25 }, (_, index) => {
     const id = index + 1;
     const randomLikes = getRandomInteger(15, 200);
     const randomDescription = getRandomArrayElement(DESCRIPTION);
-    const similarComments = Array.from({ length: getRandomInteger(0, 30) }, createComments);
+    const similarComments = Array.from({ length: getRandomInteger(0, 30) }, initComments);
 
     return {
       id: `${id}`,
@@ -20,5 +20,6 @@ const photoDescriptions = () => {
 
   return photos;
 };
+
 
 export {photoDescriptions};
