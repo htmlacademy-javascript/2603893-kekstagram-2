@@ -40,3 +40,23 @@ function getNumber(string) {
 
 
 getNumber('2023');
+
+const getTimeMinutes = (time) => {
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes;
+};
+
+function getTime(startTime, endTime, meetingStart, meetingDuration) {
+  const meetingStartMin = getTimeMinutes(meetingStart);
+  const meetingEndMin = meetingStartMin + meetingDuration;
+
+  const workStartMin = getTimeMinutes(startTime);
+  const workEndMin = getTimeMinutes(endTime);
+
+  return (
+    meetingStartMin >= workStartMin &&
+    meetingEndMin <= workEndMin
+  );
+}
+
+getTime(0, 0, 0, 0);
