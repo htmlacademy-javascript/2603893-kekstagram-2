@@ -34,4 +34,6 @@ const renderPhoto = () => {
   imageContainer.append(similarPhotoFragment);
 };
 
-export {renderPhoto};
+renderPhoto();
+
+export {renderPhoto, similarPhotos};

@@ -1,2 +1,3 @@
-import { renderPhoto } from './render/render-photo';
-renderPhoto();
+import { initThumbnailClicks } from './photo/image-viewer';
+
+initThumbnailClicks();
