@@ -11,7 +11,7 @@ const closeButton = bigPicture.querySelector('.big-picture__cancel');
 const commentsToShow = 5;
 let currentIndex = 0;
 let currentPhoto = null;
-let onEscPress; // объявляем заранее
+let onEscPress;
 
 const createCommentElement = ({avatar, message, name}) => {
   const li = document.createElement('li');
