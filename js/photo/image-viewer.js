@@ -99,8 +99,8 @@ initCommentsLoader();
 export const initThumbnailClicks = () => {
   document.querySelector('.pictures').addEventListener('click', (e) => {
     const miniPicture = e.target.closest('.picture');
-    e.preventDefault();
     if(miniPicture) {
+      e.preventDefault();
       const imgEl = miniPicture.querySelector('.picture__img');
       if(imgEl && imgEl.dataset.id) {
         const id = imgEl.dataset.id;
