@@ -1,4 +1,4 @@
-import { similarPhotos } from '../render/render-photo';
+import { closeModal, openModal } from '../utils';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
@@ -45,8 +45,7 @@ const loadMoreComments = (photo) => {
 };
 
 const closeFullPhoto = () => {
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
+  closeModal('.big-picture');
   document.removeEventListener('keydown', onEscPress);
   closeButton.removeEventListener('click', closeFullPhoto);
 };
@@ -79,8 +78,7 @@ const openFullPhoto = (photo) => {
     }
   };
 
-  bigPicture.classList.remove('hidden');
-  document.body.classList.add('modal-open');
+  openModal('.big-picture');
 
   document.addEventListener('keydown', onEscPress);
   closeButton.addEventListener('click', closeFullPhoto);
@@ -96,7 +94,7 @@ const initCommentsLoader = () => {
 
 initCommentsLoader();
 
-export const initThumbnailClicks = () => {
+export const initThumbnailClicks = (similarPhotos) => {
   document.querySelector('.pictures').addEventListener('click', (e) => {
     const miniPicture = e.target.closest('.picture');
     if(miniPicture) {

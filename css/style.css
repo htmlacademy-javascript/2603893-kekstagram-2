@@ -1429,3 +1429,13 @@ main {
 .hidden {
   display: none;
 }
+
+.img-upload__field-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-upload__field-wrapper__error {
+  margin-bottom: 20px;
+  color: gold;
+}

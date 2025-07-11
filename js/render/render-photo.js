@@ -1,8 +1,5 @@
-import { photoDescriptions } from '../photo/init-photo';
-
 const imageContainer = document.querySelector('.pictures');
 const imageTemplate = document.querySelector('#picture').content;
-const similarPhotos = photoDescriptions();
 const similarPhotoFragment = document.createDocumentFragment();
 
 const createPhoto = ({id, url, description, likes, comments}) => {
@@ -21,11 +18,10 @@ const createPhoto = ({id, url, description, likes, comments}) => {
   photoComments.textContent = comments.length || 0;
 
   return similarPhoto;
-
 };
 
 
-const renderPhoto = () => {
+const renderPhoto = (similarPhotos) => {
   similarPhotos.forEach((photo) => {
     const thumbnail = createPhoto(photo);
     similarPhotoFragment.append(thumbnail);
@@ -34,6 +30,4 @@ const renderPhoto = () => {
   imageContainer.append(similarPhotoFragment);
 };
 
-renderPhoto();
-
-export {renderPhoto, similarPhotos};
+export {renderPhoto};

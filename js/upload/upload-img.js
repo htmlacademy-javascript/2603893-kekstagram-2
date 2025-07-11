@@ -1,3 +1,5 @@
+import { closeModal, openModal } from '../utils';
+
 const fileInput = document.querySelector('.img-upload__input');
 const closeBtn = document.querySelector('.img-upload__cancel');
 const hashtagInput = document.querySelector('.text__hashtags');
@@ -5,16 +7,14 @@ const commentInput = document.querySelector('.text__description');
 let onEscPress;
 
 const closeFilePhoto = () => {
-  document.querySelector('.img-upload__overlay').classList.add('hidden');
-  document.body.classList.remove('modal-open');
+  closeModal('.img-upload__overlay');
   closeBtn.removeEventListener('click', closeFilePhoto);
   document.removeEventListener('keydown', onEscPress);
   fileInput.value = '';
 };
 
 const handleFileChange = () => {
-  document.querySelector('.img-upload__overlay').classList.remove('hidden');
-  document.body.classList.add('modal-open');
+  openModal('.img-upload__overlay');
 
   onEscPress = (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
