@@ -1,6 +1,5 @@
 const imageContainer = document.querySelector('.pictures');
 const imageTemplate = document.querySelector('#picture').content;
-const similarPhotoFragment = document.createDocumentFragment();
 
 const createPhoto = ({id, url, description, likes, comments}) => {
   const similarPhoto = imageTemplate.cloneNode(true);
@@ -22,6 +21,7 @@ const createPhoto = ({id, url, description, likes, comments}) => {
 
 
 const renderPhoto = (similarPhotos) => {
+  const similarPhotoFragment = document.createDocumentFragment();
   similarPhotos.forEach((photo) => {
     const thumbnail = createPhoto(photo);
     similarPhotoFragment.append(thumbnail);

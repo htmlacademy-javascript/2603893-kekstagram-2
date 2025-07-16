@@ -7,6 +7,9 @@ import { setUserFormSubmit } from './validate/validate-form';
 import { closeModal } from './utils';
 import { getData } from './api';
 import { showAlert } from './utils';
+import { initFilter } from './render/filter-photo';
+
+export const allPhotos = [];
 
 openFilePhoto();
 initScaleImage();
@@ -15,8 +18,12 @@ initEffectRadios();
 
 getData()
   .then((photos) => {
-    renderPhoto(photos);
+    allPhotos.length = 0;
+    allPhotos.push(...photos);
+    renderPhoto(allPhotos);
     initThumbnailClicks(photos);
+    document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+    initFilter();
   })
   .catch(
     (err) => {

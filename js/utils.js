@@ -39,5 +39,20 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
 
-export {getRandomInteger, getRandomArrayElement, closeModal, openModal, showAlert};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback(...rest), timeoutDelay);
+  };
+};
+
+
+export {getRandomInteger, getRandomArrayElement, closeModal, openModal, showAlert, shuffleArray, debounce};
