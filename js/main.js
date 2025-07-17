@@ -8,21 +8,13 @@ import { closeModal } from './utils';
 import { getData } from './api';
 import { showAlert } from './utils';
 import { initFilter } from './render/filter-photo';
-
-export const allPhotos = [];
-
-openFilePhoto();
-initScaleImage();
-initEffectRadios();
-
+import { setAllPhotos } from './get-data.js';
 
 getData()
   .then((photos) => {
-    allPhotos.length = 0;
-    allPhotos.push(...photos);
-    renderPhoto(allPhotos);
+    setAllPhotos(photos);
+    renderPhoto(photos);
     initThumbnailClicks(photos);
-    document.querySelector('.img-filters').classList.remove('img-filters--inactive');
     initFilter();
   })
   .catch(
@@ -31,4 +23,7 @@ getData()
     }
   );
 
+openFilePhoto();
+initScaleImage();
+initEffectRadios();
 setUserFormSubmit(closeModal);
