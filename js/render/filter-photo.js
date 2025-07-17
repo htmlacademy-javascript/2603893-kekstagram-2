@@ -1,12 +1,14 @@
 import { renderPhoto } from './render-photo';
-import { allPhotos } from '../main';
+import { getAllPhotos } from '../get-data';
 import { shuffleArray, debounce } from '../utils';
 
 const filterForm = document.querySelector('.img-filters__form');
 const filterBtns = document.querySelectorAll('.img-filters__button');
 
 const clearPhotos = () => {
-  document.querySelector('.pictures').innerHTML = '';
+  document.querySelectorAll('.picture').forEach((el) => {
+    el.remove();
+  });
 };
 
 const handleFilterClick = (evt) => {
@@ -23,15 +25,15 @@ const handleFilterClick = (evt) => {
   }
 
   if(target.matches('#filter-random')) {
-    filteredArray = [...allPhotos];
+    filteredArray = [...getAllPhotos()];
     shuffleArray(filteredArray);
     target.classList.add('img-filters__button--active');
     filteredArray = filteredArray.slice(0, 10);
   } else if (target.matches('#filter-discussed')) {
-    filteredArray = [...allPhotos].sort((a, b) => b.comments.length - a.comments.length);
+    filteredArray = [...getAllPhotos()].sort((a, b) => b.comments.length - a.comments.length);
     target.classList.add('img-filters__button--active');
   } else if (target.matches('#filter-default')) {
-    filteredArray = [...allPhotos];
+    filteredArray = [...getAllPhotos()];
     target.classList.add('img-filters__button--active');
   }
   clearPhotos();
@@ -42,5 +44,7 @@ const handleFilterClick = (evt) => {
 const onFilterClickDebounced = debounce(handleFilterClick, 500);
 
 export const initFilter = () => {
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
   filterForm.addEventListener('click', onFilterClickDebounced);
 };
+
