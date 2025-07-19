@@ -1,4 +1,4 @@
-import { showAlert } from '../utils';
+import { createMessage } from '../utils';
 import { sendData } from '../api';
 
 const form = document.querySelector('.img-upload__form');
@@ -23,7 +23,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = submitButtonText.IDLE;
 };
 
-const pristine = new Pristine(form, {
+export const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--invalid',
   successClass: 'img-upload__field-wrapper--valid',
@@ -74,12 +74,13 @@ function validateHashtag(value) {
   }
 
   hashtagInput.style.outline = '';
+  errorMessage = '';
 
   return true;
 }
 
 function validateComment(value) {
-  return value.length <= 140;
+  return value.length <= 137;
 }
 
 function getHashtagError() {
@@ -93,6 +94,7 @@ export const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     const isValid = pristine.validate();
     if (!isValid) {
+      pristine.validate();
       evt.preventDefault();
     } else {
       evt.preventDefault();
@@ -100,13 +102,15 @@ export const setUserFormSubmit = (onSuccess) => {
       sendData(new FormData(evt.target))
         .then(() => {
           onSuccess('.img-upload__overlay');
+          createMessage('success');
+          evt.target.reset();
+          pristine.reset();
         })
-        .catch((err) => {
-          showAlert(err.message);
+        .catch(() => {
+          createMessage('error');
         })
         .finally(() => {
           unblockSubmitButton();
-          evt.target.reset();
         });
     }
   });

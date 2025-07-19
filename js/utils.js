@@ -1,4 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
+export let isMessageOpen = false;
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -39,6 +40,62 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const createMessage = (selector) => {
+  const template = document.querySelector(`template#${selector}`);
+  const clone = template.content.cloneNode(true);
+  const selectorEl = clone.querySelector(`.${selector}`);
+  const successBtn = selectorEl.querySelector(`.${selector}__button`);
+
+  if (selector === 'data-error') {
+    setTimeout(() => {
+      if (document.body.contains(selectorEl)) {
+        selectorEl.remove();
+      }
+    }, 5000);
+  }
+
+  const onEscPress = (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      evt.stopPropagation();
+      closeMessage();
+    }
+  };
+
+  const onClickOutside = (evt) => {
+    if (!evt.target.closest(`.${selector}-inner`)) {
+      closeMessage();
+    }
+  };
+
+  const onButtonClick = () => {
+    closeMessage();
+  };
+
+  function closeMessage() {
+    selectorEl.remove();
+    isMessageOpen = false;
+
+    document.removeEventListener('keydown', onEscPress);
+    document.removeEventListener('click', onClickOutside);
+    if (successBtn) {
+      successBtn.removeEventListener('click', onButtonClick);
+    }
+  }
+
+  isMessageOpen = true;
+
+  document.body.append(selectorEl);
+
+  document.addEventListener('keydown', onEscPress);
+  document.addEventListener('click', onClickOutside);
+
+  if (successBtn) {
+    successBtn.addEventListener('click', onButtonClick);
+  }
+
+};
+
+
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -55,4 +112,4 @@ const debounce = (callback, timeoutDelay) => {
 };
 
 
-export {getRandomInteger, getRandomArrayElement, closeModal, openModal, showAlert, shuffleArray, debounce};
+export {getRandomInteger, getRandomArrayElement, closeModal, openModal, showAlert, shuffleArray, debounce, createMessage};
