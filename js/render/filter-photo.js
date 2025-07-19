@@ -13,7 +13,6 @@ const clearPhotos = () => {
 
 const handleFilterClick = (evt) => {
   const target = evt.target;
-
   let filteredArray = [];
 
   filterBtns.forEach((btn) => {
