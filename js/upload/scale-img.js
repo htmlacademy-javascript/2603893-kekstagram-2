@@ -12,7 +12,7 @@ export const initScaleImage = () => {
     let currentValue = parseInt(scaleInput.value, 10);
     if(currentValue > minScale) {
       currentValue -= step;
-      scaleInput.value = `${currentValue}`;
+      scaleInput.value = `${currentValue}%`;
       const scaleFactor = currentValue / 100;
       imgPreview.style.transform = `scale(${scaleFactor})`;
     }
